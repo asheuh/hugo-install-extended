@@ -27,18 +27,18 @@ systemtypeinstall() {
         cmd=`sudo apt install git`
         installgit $cmd 
         $(sudo apt install $2)
-    elif [ $1 = "ID=fedora" ]; # installing in Fedora
+    elif [ $1 = "ID=Fedora" ]; # installing in Fedora
     then
         cmd=`sudo apt install git`
         installgit $cmd
         $(sudo dnf install $2)
     else
-        echo "Please find installation for $1"
+        echo "Please find $2 installation for $1 online!"
     fi 
 }
 
 checkos() {
-    platform="$(uname | tr '[:upper:]' '[:lower:]')"
+    platform="$(uname | tr '[:upper:]' '[:lower:]')" # get which OS you are running
 
     if [[ $platform = "linux" ]]; 
     then
