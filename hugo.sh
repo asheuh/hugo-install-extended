@@ -20,6 +20,7 @@ systemtypeinstall() {
             makepkg -si &&
             cd ../ &&
             rm -rf snapd
+        sudo systemctl enable --now snapd.socket
         echo "Done🎉🎉🎉🎉🎉🎉!"
     elif [ $1 = "ID=ubuntu" ] || [ $1 = "ID=Debian" ];  # installing in Ubuntu or Debian
     then
