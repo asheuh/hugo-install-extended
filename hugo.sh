@@ -73,9 +73,7 @@ echo '✅ Download complete: ' $url
 
 echo "🐹 Extracting archive!"
 
-sudo tar -zxf hugo_extended_latest.tar.gz -C /usr/local/bin
-sudo rm /usr/local/bin/README.md
-sudo rm /usr/local/bin/LICENSE
+sudo tar -zxf hugo_extended_latest.tar.gz hugo -C /usr/local/bin
 
 echo '✅ Extracted to /usr/local/bin'
 
