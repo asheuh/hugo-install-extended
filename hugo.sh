@@ -12,7 +12,7 @@ installgit() {
 systemtypeinstall() {
     if [ $1 = "ID=arch" ]; # installing in Arch Linux
     then
-        echo "Installing $2 🐹🐹🐹🐹\n"
+        echo "Installing $2 ...\n"
         cmd=`sudo pacman -S git`
         installgit $cmd
         git clone https://aur.archlinux.org/snapd.git && 
@@ -21,7 +21,7 @@ systemtypeinstall() {
             cd ../ &&
             rm -rf snapd
         sudo systemctl enable --now snapd.socket
-        echo "Done🎉🎉🎉🎉🎉🎉!"
+        echo "Done!"
     elif [ $1 = "ID=ubuntu" ] || [ $1 = "ID=Debian" ];  # installing in Ubuntu or Debian
     then
         cmd=`sudo apt install git`
@@ -54,31 +54,36 @@ checkos() {
     fi
 }
 
-echo '🐹 Starting hugo install/update'
+echo "Starting hugo install/update\n"
 
 if  ! [ -x "$(command -v curl)" ];
 then
     checkos "curl"
 fi
 
-gitlatest="https://api.github.com/repositories/11180687/releases/latest"
-url=$(curl -s $gitlatest | grep -o 'https://.*hugo_extended.*_Linux-64bit.tar.gz')
 
-echo '✅ Found the latest version!'
-echo ''
-echo '🐹 Downloading the hugo extended latest...!'
-curl -s $url -L -o hugo_extended_latest.tar.gz
+verify() {
+    gitlatest="https://api.github.com/repositories/11180687/releases/latest"
+    url=$(curl -s $gitlatest | grep -o 'https://.*hugo_extended.*_Linux-64bit.tar.gz')
 
-echo '✅ Download complete: ' $url
+    echo "Found the latest version!\n"
+    echo ''
+    echo "Downloading the hugo extended latest...!\n"
+    curl -s $url -L -o hugo_extended_latest.tar.gz
 
-echo "🐹 Extracting archive!"
+    echo "Download complete: " . $url . "\n"
 
-sudo tar -zxf hugo_extended_latest.tar.gz hugo -C /usr/local/bin
+    echo "Extracting archive!\n"
 
-echo '✅ Extracted to /usr/local/bin'
+    sudo tar -zxf hugo_extended_latest.tar.gz hugo -C /usr/local/bin
 
-rm hugo_extended_latest.tar.gz
-echo ''
-echo '👉 Current Version' $(hugo version)
-echo ''
-echo '🎉 DONE! 🎉'
+    echo "Extracted to /usr/local/bin\n"
+
+    rm hugo_extended_latest.tar.gz
+    echo ""
+    echo "Current Version" . $(hugo version) . "\n"
+    echo ""
+    echo "DONE!"
+}
+
+verify()
