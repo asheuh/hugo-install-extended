@@ -49,6 +49,11 @@ checkos() {
         else
             $(snap install $1)
         fi
+    elif [[ $platform = "darwin" ]];
+    then
+        cmd=`brew install git`
+        installgit $cmd
+        $(brew install $1)
     else
         echo "Please find instructions on how to install"
     fi
